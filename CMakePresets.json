@@ -1,0 +1,112 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 28,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "base",
+      "hidden": true,
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "architecture": {
+        "value": "x64",
+        "strategy": "external"
+      },
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "clang",
+        "CMAKE_CXX_COMPILER": "clang++",
+        "TON_CORE_SIMD": "AUTO"
+      }
+    },
+    {
+      "name": "debug",
+      "displayName": "Debug Build (-O0 -g3)",
+      "description": "Unoptimized build with full debug symbols for step debugging",
+      "inherits": "base",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "TON_CORE_BUILD_TESTS": "ON"
+      }
+    },
+    {
+      "name": "dev",
+      "displayName": "Development Build (-O2 -g3 + Sanitizers)",
+      "description": "Optimized daily-driver build with ASan/UBSan, hardening, and tests",
+      "inherits": "base",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Development",
+        "TON_CORE_BUILD_TESTS": "ON"
+      }
+    },
+    {
+      "name": "dist",
+      "displayName": "Distribution Build (-O3)",
+      "description": "Maximum optimization release build for microbenchmarking",
+      "inherits": "base",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Distribution",
+        "TON_CORE_BUILD_TESTS": "ON"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "debug",
+      "configurePreset": "debug"
+    },
+    {
+      "name": "dev",
+      "configurePreset": "dev"
+    },
+    {
+      "name": "dist",
+      "configurePreset": "dist"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "debug",
+      "configurePreset": "debug",
+      "output": {
+        "outputOnFailure": true
+      }
+    },
+    {
+      "name": "dev",
+      "configurePreset": "dev",
+      "output": {
+        "outputOnFailure": true
+      }
+    },
+    {
+      "name": "dist",
+      "configurePreset": "dist",
+      "output": {
+        "outputOnFailure": true
+      }
+    }
+  ],
+  "workflowPresets": [
+    {
+      "name": "dev-pipeline",
+      "displayName": "Full Dev Pipeline (Configure -> Build -> Test)",
+      "steps": [
+        { "type": "configure", "name": "dev" },
+        { "type": "build", "name": "dev" },
+        { "type": "test", "name": "dev" }
+      ]
+    },
+    {
+      "name": "dist-pipeline",
+      "displayName": "Full Distribution Pipeline (Configure -> Build -> Test)",
+      "steps": [
+        { "type": "configure", "name": "dist" },
+        { "type": "build", "name": "dist" },
+        { "type": "test", "name": "dist" }
+      ]
+    }
+  ]
+}

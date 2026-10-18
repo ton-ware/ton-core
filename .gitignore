@@ -1,0 +1,6 @@
+build*
+_build*
+__build*
+.cache
+compile_commands.json
+CMakeUserPresets.json
