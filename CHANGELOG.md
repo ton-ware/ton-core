@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- [Math] Add templated Point2 struct with equality, ordering, and subscript operators ([#2](https://github.com/ton-ware/ton-core/issues/2))
-- [Core] Add foundational primitive types and engine constants ([#3](https://github.com/ton-ware/ton-core/issues/3))
-- [Init] Project initialization and basic setup ([#2](https://github.com/ton-ware/ton-core/issues/1))
+- **math**: templated Point2 struct with equality, ordering, and subscript operators
+- **core**: foundational primitive types and engine constants
+- **init**: project initialization and basic setup
+

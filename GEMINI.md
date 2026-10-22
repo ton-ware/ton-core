@@ -7,5 +7,7 @@
 2. **Active Skills**:
    - Activate the **`mentorship`** skill (`.agents/skills/mentorship/SKILL.md`) whenever explaining concepts, designing systems, debugging, or reviewing code.
    - Activate the **`cpp-cmake-guidelines`** skill (`.agents/skills/cpp-cmake-guidelines/SKILL.md`) whenever configuring CMake, `CMakePresets.json`, compiler flags, sanitizers, or reviewing SIMD/math architecture.
-3. **Changelog Convention**:
-   - Format `CHANGELOG.md` entries as: `- [Tag] Description ([#N](https://github.com/ton-ware/ton-core/issues/N))`.
+3. **Commit & Changelog Convention (Vendor-Agnostic Conventional Commits)**:
+   - **Git Commits**: Follow Conventional Commits: `<type>(<scope>): <imperative-description>`. NEVER include provider-specific issue links (e.g., `#N`, `https://github.com/...`) in commit subjects or messages.
+   - **Changelog**: Under [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) (`### Added` / `### Changed` / `### Fixed` / `### Removed`), format entries as:
+     `- **<scope>**: <description>` (no provider issue links).

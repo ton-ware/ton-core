@@ -19,10 +19,8 @@ TON Core is the foundational mathematics and systems library for the TON engine 
 **TON Core** serves as the single source of truth for shared foundations across the **TON** project:
 
 - **`core/types.hpp` & `core/consts.hpp`**: Standardized fixed-width type aliases (`F32`, `F64`, `I8`, `UI8`, `I32`, `UI32`) and mathematical constants.
-- **`core/math/`**: 2D/3D/4D vectors (`Vec2`, `Vec3`, `Vec4`), matrices, quaternions, and linear algebra utilities.
-- **`core/math/simd*`**: Explicit, zero-overhead SIMD vector intrinsics with clean scalar fallbacks for architectures lacking vector extensions.
-
----
+- **`math/`**: 2D/3D/4D vectors (`Vec2`, `Vec3`, `Vec4`), matrices, quaternions, and linear algebra utilities.
+- **`math/simd*`**: Explicit, zero-overhead SIMD vector intrinsics with clean scalar fallbacks for architectures lacking vector extensions.
 
 ## SIMD Architecture Options
 
@@ -37,7 +35,6 @@ TON Core is the foundational mathematics and systems library for the TON engine 
 | **`NEON`** | ARM Advanced SIMD (Cortex / Apple Silicon) | `-DTON_SIMD_NEON -DTON_SIMD_ENABLED=1` |
 | **`NONE`** | Pure scalar fallbacks (Embedded / ESP32 / Benchmarking) | `-DTON_SIMD_NONE -DTON_SIMD_ENABLED=0` |
 
----
 
 ## Requirements
 
@@ -52,8 +49,6 @@ TON Core is the foundational mathematics and systems library for the TON engine 
 
 When consumed by downstream projects (`ton-engine` or `ton-silicon`) via `FetchContent` or `add_subdirectory`, unit tests and benchmarks are disabled automatically (`TON_CORE_BUILD_TESTS=OFF`), and the consumer's compiler flags govern the build.
 
----
-
 ## Building Standalone (Tests & Microbenchmarks)
 
 `TonCore` includes CMake Presets for standalone testing and benchmarking:
@@ -64,6 +59,7 @@ When consumed by downstream projects (`ton-engine` or `ton-silicon`) via `FetchC
 | **Debug** | `debug` | `-O0 -g3` with full symbols for step-debugging, tests `ON` |
 | **Development** | `dev` | `-O2 -g3` + Address/UB Sanitizers + hardening, tests `ON` |
 | **Distribution** | `dist` | `-O3 -DNDEBUG` maximum optimization for microbenchmarking |
+
 
 ### Development Workflow
 
@@ -86,33 +82,6 @@ Or execute the complete workflow in one command:
 ```bash
 cmake --workflow --preset dev-pipeline
 ```
-
----
-
-## Project Structure
-
-```text
-ton-core/
-├── CMakeLists.txt                  # Dual-mode CMake configuration & SIMD dispatch
-├── CMakePresets.json               # Standalone test/benchmark presets
-├── src/
-│   └── core/                       # Core library root
-│       ├── CMakeLists.txt
-│       ├── consts.hpp              # Fundamental constants
-│       ├── types.hpp               # Standardized type definitions
-│       └── math/                   # Linear algebra foundation
-│           ├── vec2.hpp / .cpp
-│           ├── vec3.hpp / .cpp
-│           ├── vec4.hpp / .cpp
-│           ├── utils.hpp / .cpp
-│           └── simd.hpp (Intel / ARM / Scalar)
-└── test/                           # Catch2 unit tests and microbenchmarks
-    ├── CMakeLists.txt
-    └── core/
-        └── sanity_tests.cpp
-```
-
----
 
 ## License
 
