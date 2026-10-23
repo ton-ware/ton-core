@@ -30,4 +30,16 @@ using F32 = float;
 using F64 = double;
 using Isize = std::ptrdiff_t;
 using Usize = std::size_t;
+
+struct Extent2D
+{
+    U32 width;
+    U32 height;
+};
+
+struct Offset2D
+{
+    I32 x;
+    I32 y;
+};
 } // namespace ton::core
