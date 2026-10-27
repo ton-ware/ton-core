@@ -13,6 +13,7 @@ list(APPEND CMAKE_MODULE_PATH ${catch2_SOURCE_DIR}/extras)
 add_executable(TonCoreTests
   core/sanity_tests.cpp
   math/point2_tests.cpp
+  math/point3_tests.cpp
 )
 
 target_link_libraries(TonCoreTests
